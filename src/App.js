@@ -132,9 +132,9 @@ function App() {
                 //open={inputValue.length > 2}
                 renderInput={params => <TextField {...params} label="Search cocktail by name" />}
               />
-              <Button sx={{ mt: 3 }} variant="contained">
+              {/* <Button sx={{ mt: 3 }} variant="contained">
                 Search
-              </Button>
+              </Button> */}
             </FormControl>
           </Paper>
           <main>
