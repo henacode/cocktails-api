@@ -20,25 +20,34 @@ import Link from "@mui/material/Link";
 
 let theme = createTheme({
   palette: {
+    background: {
+      default: "#f2f4f8"
+    },
     primary: {
       main: "#595a5a",
-      contrastText: "#fff"
-    }
+      contrastText: "#fff",
+      backgroundColor: "#f2f4f8",
+    },
+  },
+  shape: {
+    borderRadius: 0,
+    boxShadow: "",
   },
   components: {
     MuiLink: {
       styleOverrides: {
         "&:hover": { textDecoration: "underline" },
         underline: "always",
-        primary: { color: "#fff", textDecoration: "underline" }
-      }
-    }
+        primary: { color: "#fff", textDecoration: "underline" },
+      },
+    },
+
     // MuiButton: {
     //   styleOverrides: {
     //     primary: { backgroundColor: "#595a5a" }
     //   }
     // }
-  }
+  },
 });
 theme = responsiveFontSizes(theme);
 
@@ -67,7 +76,7 @@ function App() {
               maxWidth: "100%",
               mt: 3,
               height: "auto",
-              width: 200
+              width: 200,
             }}
             alt="Cocktail Search"
             src="/LogoCocktail.png"
@@ -85,12 +94,13 @@ function App() {
           Search cocktail
         </Typography> */}
         <Container maxWidth="md" sx={{ mt: 3 }}>
-          <Paper sx={{ p: 0 }} elevation={0}>
-            <Typography variant="h5" align="center" color="TextSecondary" gutterBottom>
+          <div>
+            <Typography variant="h5" align="center" gutterBottom>
               You can find some cocktails on this site
             </Typography>
-            <FormControl fullWidth sx={{ maxWidth: "md" }}>
+            <FormControl fullWidth sx={{ maxWidth: "md", borderRadius: 0, boxShadow: "0 3px 6px rgba(0, 0, 0, 0.11), 0 6px 12px rgba(220, 233, 255, 0.27)" }}>
               <Autocomplete
+                sx={{ p: 0, backgroundColor: "#fff", borderRadius: 0 }}
                 inputValue={inputValue}
                 onInputChange={(event, value, reason) => {
                   if (event && event.type === "blur") {
@@ -99,6 +109,7 @@ function App() {
                     setInputValue(value);
                   }
                 }}
+                freeSolo
                 renderOption={(props, jsonResults) => {
                   const thumbUrl = jsonResults.strDrinkThumb + "/preview";
                   return (
@@ -108,7 +119,7 @@ function App() {
                           component="img"
                           sx={{
                             height: 30,
-                            width: 30
+                            width: 30,
                           }}
                           alt={jsonResults.strDrink}
                           src={thumbUrl}
@@ -123,20 +134,20 @@ function App() {
                 }}
                 options={jsonResults ? jsonResults : []}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
-                getOptionLabel={jsonResults => `${jsonResults.strDrink}`}
+                getOptionLabel={(jsonResults) => `${jsonResults.strDrink}`}
                 onChange={(event, item) => {
                   if (item) {
                     setInputValue(item.strDrink);
                   }
                 }}
                 //open={inputValue.length > 2}
-                renderInput={params => <TextField {...params} label="Search cocktail by name" />}
+                renderInput={(params) => <TextField {...params} label="Search cocktail by name" />}
               />
               {/* <Button sx={{ mt: 3 }} variant="contained">
                 Search
               </Button> */}
             </FormControl>
-          </Paper>
+          </div>
           <main>
             <div className="Main">
               <Routes>
@@ -148,11 +159,11 @@ function App() {
           </main>
         </Container>
       </div>
-      <AppBar position="static" sx={{ mt: 3 }} elevation={0} component="footer" color="default">
+      {/* <AppBar position="static" sx={{ mt: 3 }} elevation={0} component="footer" color="default">
         <Toolbar style={{ justifyContent: "center" }}>
           <Typography variant="caption">©{new Date().getFullYear()}</Typography>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
     </ThemeProvider>
   );
 }

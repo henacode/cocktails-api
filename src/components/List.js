@@ -10,11 +10,11 @@ export default function List({}) {
   const { ingredientName } = useParams();
 
   //get cocktails by ingredient
-  const getItemsResults = async item => {
+  const getItemsResults = async (item) => {
     const response = await axios.get(
       ingredientName
         ? `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredientName}`
-        : `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`
+        : `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=mar`
     );
     if (response.data.drinks) {
       // console.log(response.data.drinks);
@@ -32,33 +32,39 @@ export default function List({}) {
       <Typography variant="h3" align="center" color="TextSecondary" gutterBottom>
         {ingredientName ? `Cocktails with ${ingredientName}` : ""}
       </Typography>
-      <Grid container spacing={2}>
+      <Grid container spacing={3}>
         {itemsResults
-          ? itemsResults.map(item => (
+          ? itemsResults.slice(0, 8).map((item) => (
               <Grid item xs={6} md={4} lg={3} sx={{ p: 0 }}>
                 <Link underline="none" component={RouterLink} to={`/Cocktail/(${item.idDrink})-${item.strDrink}`}>
                   <Paper
+                    className="card"
                     sx={{
                       p: 1,
                       m: 0,
-                      backgroundColor: "#fafafa",
-                      maxWidth: "200px",
+                      borderRadius: "0 10px 0 0",
+                      borderWidth: 0,
+                      height: 270,
                       "&:hover": {
                         color: "black",
-                        backgroundColor: "lightgray"
-                      }
+                        backgroundColor: "lightgray",
+                      },
                     }}
                     variant="outlined"
                   >
-                    <Box
-                      component="img"
-                      sx={{
-                        height: 100,
-                        width: 100
-                      }}
-                      alt={item.strDrink}
-                      src={item.strDrinkThumb}
-                    />
+                    <div className="imgOverlay"></div>
+                    <div className="circle">
+                      <Box
+                        component="img"
+                        sx={{
+                          height: 118,
+                          width: 118,
+                          borderRadius: "50%",
+                        }}
+                        alt={item.strDrink}
+                        src={item.strDrinkThumb}
+                      />
+                    </div>
                     <Typography variant="h6" sx={{ p: 0, m: 0 }} align="center" color="TextSecondary" gutterBottom>
                       {item.strDrink}
                     </Typography>
