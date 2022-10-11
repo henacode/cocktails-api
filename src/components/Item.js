@@ -49,7 +49,7 @@ export default function Item() {
                 maxWidth: "100%",
                 height: "auto",
                 width: 400,
-                border: "4px solid #dce9ff",
+                border: "4px solid #d7d7d7",
               }}
               alt={itemData.strDrink}
               src={itemData.strDrinkThumb}
