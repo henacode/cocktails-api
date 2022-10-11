@@ -140,7 +140,7 @@ function App() {
                           src={thumbUrl}
                         />
                         &nbsp;
-                        <Link component={RouterLink} to={`/Cocktail/(${jsonResults.idDrink})-${jsonResults.strDrink}`}>
+                        <Link sx={{ textDecoration: "none" }} component={RouterLink} to={`/Cocktail/(${jsonResults.idDrink})-${jsonResults.strDrink}`}>
                           {jsonResults.strDrink} - {jsonResults.strAlcoholic} {jsonResults.strCategory}
                         </Link>
                       </Fragment>
