@@ -21,7 +21,7 @@ import Link from "@mui/material/Link";
 let theme = createTheme({
   palette: {
     background: {
-      default: "#f2f4f8"
+      default: "#f2f4f8",
     },
     primary: {
       main: "#595a5a",
@@ -34,14 +34,6 @@ let theme = createTheme({
     boxShadow: "",
   },
   components: {
-    MuiLink: {
-      styleOverrides: {
-        "&:hover": { textDecoration: "underline" },
-        underline: "always",
-        primary: { color: "#fff", textDecoration: "underline" },
-      },
-    },
-
     // MuiButton: {
     //   styleOverrides: {
     //     primary: { backgroundColor: "#595a5a" }
@@ -57,13 +49,17 @@ function App() {
 
   //get items
   const getJsonResults = async () => {
-    const response = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputValue}`);
-    if (response.data.drinks) {
-      setJsonResults(response.data.drinks);
+    if (inputValue.length > 0) {
+      const response = await axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputValue}`);
+      if (response.data.drinks) {
+        setJsonResults(response.data.drinks);
+      }
     }
   };
 
-  getJsonResults();
+  if (jsonResults == undefined) {
+    getJsonResults();
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -98,9 +94,28 @@ function App() {
             <Typography variant="h5" align="center" gutterBottom>
               You can find some cocktails on this site
             </Typography>
-            <FormControl fullWidth sx={{ maxWidth: "md", borderRadius: 0, boxShadow: "0 3px 6px rgba(0, 0, 0, 0.11), 0 6px 12px rgba(220, 233, 255, 0.27)" }}>
+            <FormControl
+              fullWidth
+              sx={{
+                maxWidth: "md",
+                borderRadius: 0,
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.17), 0 6px 12px rgba(220, 233, 255, 0.27)",
+              }}
+            >
               <Autocomplete
-                sx={{ p: 0, backgroundColor: "#fff", borderRadius: 0 }}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& > fieldset": { borderColor: "rgba(0, 0, 0, 0.12)" },
+                  },
+                  "& .MuiOutlinedInput-root:hover": {
+                    "& > fieldset": {
+                      borderColor: "rgb(220 232 255)",
+                    },
+                  },
+                  p: 0,
+                  backgroundColor: "#fff",
+                  borderRadius: 0,
+                }}
                 inputValue={inputValue}
                 onInputChange={(event, value, reason) => {
                   if (event && event.type === "blur") {

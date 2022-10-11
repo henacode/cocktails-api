@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 
-export default function List({}) {
+export default function List() {
   const [itemsResults, setItemsResults] = useState();
   const { ingredientName } = useParams();
 
@@ -17,7 +17,7 @@ export default function List({}) {
         : `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=mar`
     );
     if (response.data.drinks) {
-      // console.log(response.data.drinks);
+      //console.log(response.data.drinks);
       setItemsResults(response.data.drinks);
     }
   };
@@ -26,16 +26,17 @@ export default function List({}) {
   useEffect(() => {
     getItemsResults();
   }, []);
+
   return (
     <div>
       {/* <Paper sx={{ p: 3, mt: 3 }} elevation={2}> */}
-      <Typography variant="h3" align="center" color="TextSecondary" gutterBottom>
+      <Typography variant="h3" align="center" sx={{ m: 3 }} color="TextSecondary" gutterBottom>
         {ingredientName ? `Cocktails with ${ingredientName}` : ""}
       </Typography>
       <Grid container spacing={3}>
         {itemsResults
           ? itemsResults.slice(0, 8).map((item) => (
-              <Grid item xs={6} md={4} lg={3} sx={{ p: 0 }}>
+              <Grid key={item.idDrink} item xs={6} md={4} lg={3} sx={{ p: 0 }}>
                 <Link underline="none" component={RouterLink} to={`/Cocktail/(${item.idDrink})-${item.strDrink}`}>
                   <Paper
                     className="card"
