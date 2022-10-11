@@ -41,8 +41,8 @@ export default function Item() {
         <Typography variant="h3" sx={{ mt: 3 }} align="center" color="TextSecondary" gutterBottom>
           Cocktail {itemData.strDrink}
         </Typography>
-        <Grid container spacing={2} sx={{ mt: 1 }}>
-          <Grid item xs={12} md={6} sx={{ p: 3 }}>
+        <Grid container spacing={3} sx={{ mt: 1 }}>
+          <Grid item xs={12} md={6}>
             <Box
               component="img"
               sx={{
@@ -58,11 +58,11 @@ export default function Item() {
               {itemData.strInstructions}
             </Typography>
           </Grid>
-          <Grid item xs={12} md={6} sx={{ p: 3 }}>
+          <Grid item xs={12} md={6}>
             <Typography variant="h4" align="center" color="TextSecondary" gutterBottom>
               Ingredients
             </Typography>
-            <Grid container spacing={2}>
+            <Grid container>
               {ingredients.map((item) => (
                 <Grid key={item.ingredientName} item xs={6} sx={{ p: 3 }}>
                   <Link className="card" component={RouterLink} to={`/Ingredients/${item.ingredientName}`}>

@@ -172,13 +172,15 @@ function App() {
               </Routes>
             </div>
           </main>
+          <AppBar position="static" sx={{ mt: 3 }} elevation={0} component="footer" color="default">
+            <Toolbar style={{ justifyContent: "center", padding: 0 }}>
+              <Typography variant="caption" width={"100%"} borderTop={"1px solid #e1e1e1"} fontSize={"0.9rem"}>
+                © Cocktails search {new Date().getFullYear()}
+              </Typography>
+            </Toolbar>
+          </AppBar>
         </Container>
       </div>
-      {/* <AppBar position="static" sx={{ mt: 3 }} elevation={0} component="footer" color="default">
-        <Toolbar style={{ justifyContent: "center" }}>
-          <Typography variant="caption">©{new Date().getFullYear()}</Typography>
-        </Toolbar>
-      </AppBar> */}
     </ThemeProvider>
   );
 }
